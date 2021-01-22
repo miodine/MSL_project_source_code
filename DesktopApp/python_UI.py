@@ -290,10 +290,10 @@ class Ui_MainWindow(object):
         self.button_transmit_data.clicked.connect(self.event_transmitData)
 
         ##CLASS constants
-        self.MAX_RPM = 20000
+        self.MAX_RPM = 8000
         self.MIN_RPM = 0
 
-        self.INCREMENT_STEP_RPM = 1000
+        self.INCREMENT_STEP_RPM = 100
 
         self.P_GAIN_DEFAULT = 1
         self.I_GAIN_DEFAULT = 1
@@ -387,27 +387,29 @@ class Ui_MainWindow(object):
         if self.RPM_to_be_set > self.MIN_RPM:
             self.RPM_to_be_set -= self.INCREMENT_STEP_RPM
             self._update_monit("RPM to-be-set decreased")
+
             self.var_progressbar.setProperty("value", int(self.RPM_to_be_set/self.MAX_RPM * 100))
         else:
             self._update_monit("RPM to-be-set cannot be decreased anymore!")
+        self.var_velocity.setText(str(self.RPM_to_be_set) + " RPM")
+
 
     def event_updatePIDFromValues(self):
         self.p_gain = int(100*self.var_spinbox_P.value())
         self.i_gain = int(100*self.var_spinbox_I.value())
         self.d_gain = int(100*self.var_spinbox_D.value())
-        self._update_monit("PID tuning set. To-be-transmitted values are user-defined. (UNSAFE)")
+        self._update_monit("PID control not available in demo version. Please pay 1,500,000 USD to obtain all the features.")
 
     def event_updatePIDDefault(self):
         self.p_gain = self.P_GAIN_DEFAULT
         self.i_gain = self.I_GAIN_DEFAULT
         self.d_gain = self.D_GAIN_DEFAULT
-
-        self._update_monit("PID tuning set. To-be-transmitted values are of default type.")
+        self._update_monit("PID control not available in demo version. Please pay 1,500,000 USD to obtain all the features.")
 
     def event_transmitData(self):
         self._update_monit("Sending an update...")
         self.RPM_set = self.RPM_to_be_set
-        self.var_sysin.setText(str(self.RPM_set))
+        self.var_sysin.setText(str(self.RPM_set) + " RPM")
         self.serial_handler.send_data(self.p_gain,self.i_gain,self.d_gain,self.RPM_set)
         self._update_monit("Update sent.")
 
