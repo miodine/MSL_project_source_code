@@ -64,7 +64,6 @@ void increment_counter_at_tacho_ev(Program_Data* pd)
     pd->HAL_PULSE_counter++;
 }
 
-
 void update_PWM_duty(Program_Data* pd)
 {
 	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pd->PWM);

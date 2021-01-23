@@ -39,11 +39,11 @@ class MSL_UART_handler():
                 if log_flag== True:
                     file_in.write("%d\n" %  status_code)
                     file_out.write("%d\n" % RPM_actual) 
+
         if received_RPM_reference != RPM_reference:
             enc_flag = True
 
-
-        return received_RPM_reference, RPM_reference,status_code,enc_flag
+        return RPM_actual,received_RPM_reference, status_code,enc_flag
 
     def send_data(self, Kp, Ki, Kd, RPM_set):
         #self.ser.write(struct.pack("B", COM_FLAG))
