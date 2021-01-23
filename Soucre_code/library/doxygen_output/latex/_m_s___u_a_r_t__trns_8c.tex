@@ -11,7 +11,7 @@ Bodies of the functions realisng data transmission/receiving.
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{_m_s___u_a_r_t__trns_8c_a801c06e9bd5096cf3aca4aed6ef74318}{transmit\+\_\+data\+\_\+packet}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
-\begin{DoxyCompactList}\small\item\em Transmit data packet with current reference velocity, structure of the packet\+: 8-\/bit transmit flag, 32-\/bit current R\+PM readout. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Transmit data packet with current reference velocity, structure of the packet\+: 8-\/bit transmit flag, 32-\/bit current R\+PM readout, 32-\/bit reference R\+PM echo. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_m_s___u_a_r_t__trns_8c_a98af1b82dfb54fae1abd95481dca8fc2}{deparse\+\_\+received\+\_\+data}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
 \begin{DoxyCompactList}\small\item\em Deparse received data packet; expected format\+: 96-\/bits of nothing, and 32-\/bits of new R\+PM value to be set. This \char`\"{}nothing\char`\"{} was meant to convey the P\+ID tuning, but in this version -\/ we decided to go with some simpler error compensation algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -48,6 +48,10 @@ Use U\+S\+A\+R\+T3 interface, enable Receive IT mode, as shown in \mbox{\hyperli
 {\em None} & \\
 \hline
 \end{DoxyRetVals}
+
+
+Definition at line 29 of file M\+S\+\_\+\+U\+A\+R\+T\+\_\+trns.\+c.
+
 \mbox{\Hypertarget{_m_s___u_a_r_t__trns_8c_a801c06e9bd5096cf3aca4aed6ef74318}\label{_m_s___u_a_r_t__trns_8c_a801c06e9bd5096cf3aca4aed6ef74318}} 
 \index{MS\_UART\_trns.c@{MS\_UART\_trns.c}!transmit\_data\_packet@{transmit\_data\_packet}}
 \index{transmit\_data\_packet@{transmit\_data\_packet}!MS\_UART\_trns.c@{MS\_UART\_trns.c}}
@@ -56,7 +60,7 @@ Use U\+S\+A\+R\+T3 interface, enable Receive IT mode, as shown in \mbox{\hyperli
 
 
 
-Transmit data packet with current reference velocity, structure of the packet\+: 8-\/bit transmit flag, 32-\/bit current R\+PM readout. 
+Transmit data packet with current reference velocity, structure of the packet\+: 8-\/bit transmit flag, 32-\/bit current R\+PM readout, 32-\/bit reference R\+PM echo. 
 
 \begin{DoxyAttention}{Attention}
 Use U\+S\+A\+R\+T3 interface.
@@ -71,3 +75,7 @@ Use U\+S\+A\+R\+T3 interface.
 {\em None} & \\
 \hline
 \end{DoxyRetVals}
+
+
+Definition at line 14 of file M\+S\+\_\+\+U\+A\+R\+T\+\_\+trns.\+c.
+

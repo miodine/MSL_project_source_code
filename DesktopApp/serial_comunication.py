@@ -22,6 +22,10 @@ class MSL_UART_handler():
                 s = self.ser.read(4)
                 RPM_actual = int.from_bytes(s,'little')
                 print(RPM_actual)
+
+                s = self.ser.read(4)
+                RPM_reference = int.from_bytes(s,'little')
+                print(RPM_actual)
                 
                 s = self.ser.read(1)
                 status_code = int.from_bytes(s,'little')

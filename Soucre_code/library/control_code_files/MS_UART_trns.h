@@ -30,7 +30,7 @@ void deparse_received_data(Program_Data* pd);
 
 /**
   * @brief  Transmit data packet with current reference velocity, structure of the packet:
-  *         8-bit transmit flag, 32-bit current RPM readout.
+  *         8-bit transmit flag, 32-bit current RPM readout, 32-bit reference RPM echo.
   *    
   * @attention Use USART3 interface. 
   *  

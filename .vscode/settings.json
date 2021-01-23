@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "ms_uart_trns.h": "c"
+    }
+}
