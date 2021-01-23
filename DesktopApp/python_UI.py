@@ -356,7 +356,7 @@ class Ui_MainWindow(object):
 ## CLASS METHODS
 
     def reg_quality_update(self):
-        self.RPM_actual,self.RPM_set, self.status = self.serial_handler.read_data(self.RPM_actual, self.RPM_set,self.status, self.input_logger, self.output_logger, self.logging_started)    
+        self.RPM_actual,self.status = self.serial_handler.read_data(self.RPM_actual, self.status, self.input_logger, self.output_logger, self.logging_started)    
         self.var_sysout.setText(str(self.RPM_actual) + " RPM")
         self.var_regerror.setText(str(self.RPM_set - self.RPM_actual)+ " RPM")  
         if(self.status != 0):

@@ -1,0 +1,77 @@
+\hypertarget{_m_s__core_8h}{}\doxysection{C\+:/\+Users/mam5p/\+Desktop/git/raycar/\+M\+S\+L\+\_\+project\+\_\+source\+\_\+code/\+Soucre\+\_\+code/library/control\+\_\+code\+\_\+files/\+M\+S\+\_\+core.h File Reference}
+\label{_m_s__core_8h}\index{C:/Users/mam5p/Desktop/git/raycar/MSL\_project\_source\_code/Soucre\_code/library/control\_code\_files/MS\_core.h@{C:/Users/mam5p/Desktop/git/raycar/MSL\_project\_source\_code/Soucre\_code/library/control\_code\_files/MS\_core.h}}
+
+
+Initialization and Program Data structure.  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}adc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tim.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}usart.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}arm\+\_\+math.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}math.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} structure definiton, holding all the variables necessary for realisation of the fan R\+PM control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} \mbox{\hyperlink{_m_s__core_8h_a27af7a8c566015873a2e30871d6ea9c9}{Program\+\_\+\+Data}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} structure definiton, holding all the variables necessary for realisation of the fan R\+PM control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_m_s__core_8h_a657993cab1db72a4e524d79ab3987a2a}{initialize\+\_\+\+S\+T\+M32\+\_\+interfaces}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Initialization of S\+T\+M32 interfaces, and relevant data fields. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Initialization and Program Data structure. 
+
+\begin{DoxyAuthor}{Author}
+Paweł Rozenblut 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_m_s__core_8h_a27af7a8c566015873a2e30871d6ea9c9}\label{_m_s__core_8h_a27af7a8c566015873a2e30871d6ea9c9}} 
+\index{MS\_core.h@{MS\_core.h}!Program\_Data@{Program\_Data}}
+\index{Program\_Data@{Program\_Data}!MS\_core.h@{MS\_core.h}}
+\doxysubsubsection{\texorpdfstring{Program\_Data}{Program\_Data}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}}}
+
+
+
+\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} structure definiton, holding all the variables necessary for realisation of the fan R\+PM control. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_m_s__core_8h_a657993cab1db72a4e524d79ab3987a2a}\label{_m_s__core_8h_a657993cab1db72a4e524d79ab3987a2a}} 
+\index{MS\_core.h@{MS\_core.h}!initialize\_STM32\_interfaces@{initialize\_STM32\_interfaces}}
+\index{initialize\_STM32\_interfaces@{initialize\_STM32\_interfaces}!MS\_core.h@{MS\_core.h}}
+\doxysubsubsection{\texorpdfstring{initialize\_STM32\_interfaces()}{initialize\_STM32\_interfaces()}}
+{\footnotesize\ttfamily void initialize\+\_\+\+S\+T\+M32\+\_\+interfaces (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Initialization of S\+T\+M32 interfaces, and relevant data fields. 
+
+\begin{DoxyAttention}{Attention}
+Pay attention to the function body in the \mbox{\hyperlink{_m_s__core_8c}{M\+S\+\_\+core.\+c}} file.
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

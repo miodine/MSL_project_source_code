@@ -1,0 +1,73 @@
+\hypertarget{_m_s___u_a_r_t__trns_8c}{}\doxysection{C\+:/\+Users/mam5p/\+Desktop/git/raycar/\+M\+S\+L\+\_\+project\+\_\+source\+\_\+code/\+Soucre\+\_\+code/library/control\+\_\+code\+\_\+files/\+M\+S\+\_\+\+U\+A\+R\+T\+\_\+trns.c File Reference}
+\label{_m_s___u_a_r_t__trns_8c}\index{C:/Users/mam5p/Desktop/git/raycar/MSL\_project\_source\_code/Soucre\_code/library/control\_code\_files/MS\_UART\_trns.c@{C:/Users/mam5p/Desktop/git/raycar/MSL\_project\_source\_code/Soucre\_code/library/control\_code\_files/MS\_UART\_trns.c}}
+
+
+Bodies of the functions realisng data transmission/receiving.  
+
+
+{\ttfamily \#include \char`\"{}M\+S\+\_\+\+U\+A\+R\+T\+\_\+trns.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}M\+S\+\_\+core.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_m_s___u_a_r_t__trns_8c_a801c06e9bd5096cf3aca4aed6ef74318}{transmit\+\_\+data\+\_\+packet}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Transmit data packet with current reference velocity, structure of the packet\+: 8-\/bit transmit flag, 32-\/bit current R\+PM readout. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s___u_a_r_t__trns_8c_a98af1b82dfb54fae1abd95481dca8fc2}{deparse\+\_\+received\+\_\+data}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Deparse received data packet; expected format\+: 96-\/bits of nothing, and 32-\/bits of new R\+PM value to be set. This \char`\"{}nothing\char`\"{} was meant to convey the P\+ID tuning, but in this version -\/ we decided to go with some simpler error compensation algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Bodies of the functions realisng data transmission/receiving. 
+
+\begin{DoxyAuthor}{Author}
+Paweł Rozenblut 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_m_s___u_a_r_t__trns_8c_a98af1b82dfb54fae1abd95481dca8fc2}\label{_m_s___u_a_r_t__trns_8c_a98af1b82dfb54fae1abd95481dca8fc2}} 
+\index{MS\_UART\_trns.c@{MS\_UART\_trns.c}!deparse\_received\_data@{deparse\_received\_data}}
+\index{deparse\_received\_data@{deparse\_received\_data}!MS\_UART\_trns.c@{MS\_UART\_trns.c}}
+\doxysubsubsection{\texorpdfstring{deparse\_received\_data()}{deparse\_received\_data()}}
+{\footnotesize\ttfamily void deparse\+\_\+received\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Deparse received data packet; expected format\+: 96-\/bits of nothing, and 32-\/bits of new R\+PM value to be set. This \char`\"{}nothing\char`\"{} was meant to convey the P\+ID tuning, but in this version -\/ we decided to go with some simpler error compensation algorithm. 
+
+\begin{DoxyAttention}{Attention}
+Use U\+S\+A\+R\+T3 interface, enable Receive IT mode, as shown in \mbox{\hyperlink{_m_s__core_8c_a657993cab1db72a4e524d79ab3987a2a}{initialize\+\_\+\+S\+T\+M32\+\_\+interfaces()}} function and call the H\+AL Receive IT in the very same way in appropriate callback again, after calling this function 
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s___u_a_r_t__trns_8c_a801c06e9bd5096cf3aca4aed6ef74318}\label{_m_s___u_a_r_t__trns_8c_a801c06e9bd5096cf3aca4aed6ef74318}} 
+\index{MS\_UART\_trns.c@{MS\_UART\_trns.c}!transmit\_data\_packet@{transmit\_data\_packet}}
+\index{transmit\_data\_packet@{transmit\_data\_packet}!MS\_UART\_trns.c@{MS\_UART\_trns.c}}
+\doxysubsubsection{\texorpdfstring{transmit\_data\_packet()}{transmit\_data\_packet()}}
+{\footnotesize\ttfamily void transmit\+\_\+data\+\_\+packet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Transmit data packet with current reference velocity, structure of the packet\+: 8-\/bit transmit flag, 32-\/bit current R\+PM readout. 
+
+\begin{DoxyAttention}{Attention}
+Use U\+S\+A\+R\+T3 interface.
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

@@ -1,0 +1,194 @@
+\hypertarget{_m_s__signal__control_8c}{}\doxysection{C\+:/\+Users/mam5p/\+Desktop/git/raycar/\+M\+S\+L\+\_\+project\+\_\+source\+\_\+code/\+Soucre\+\_\+code/library/control\+\_\+code\+\_\+files/\+M\+S\+\_\+signal\+\_\+control.c File Reference}
+\label{_m_s__signal__control_8c}\index{C:/Users/mam5p/Desktop/git/raycar/MSL\_project\_source\_code/Soucre\_code/library/control\_code\_files/MS\_signal\_control.c@{C:/Users/mam5p/Desktop/git/raycar/MSL\_project\_source\_code/Soucre\_code/library/control\_code\_files/MS\_signal\_control.c}}
+
+
+Bodies of the functions realising F\+AN R\+PM control.  
+
+
+{\ttfamily \#include \char`\"{}M\+S\+\_\+signal\+\_\+control.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_a6fdf7020f344d899c73f618ce8567d75}{compensate\+\_\+error}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Update P\+WM duty cycle, if desired R\+PM is not within the control error range envelope (compensation is being triggered at +/-\/ 0.\+5\% of the total range of 0 R\+PM to 8000 R\+PM). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_a41e6d6d32d2de1cfa657572ece0883ff}{set\+\_\+\+P\+W\+M\+\_\+from\+\_\+\+R\+PM}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Obtain the value of P\+WM duty cycle to be set, from reference R\+PM. If desired R\+PM is within the appropriate control range, the ~\newline
+ function interpolates the P\+WM to be set, from the following dependency\+: P\+WM = (R\+PM -\/ 8332.\+9)/(-\/8.\+3707)). ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_a060ebfa3cd7dac5cd16c131af0c1c9c9}{set\+\_\+reference\+\_\+\+R\+PM}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd, uint32\+\_\+t new\+\_\+\+R\+P\+M\+\_\+ref)
+\begin{DoxyCompactList}\small\item\em Set new reference value of fan\textquotesingle{}s R\+PM. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_ae109753ed1798aa1c854b69978d00e85}{get\+\_\+\+R\+P\+M\+\_\+actual}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Get the current value of R\+PM, and reset the counter measuring H\+AL sensor ticks in the duration of one second. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_afc36ab908fdadfe06cf7a6b3e1c0f7da}{increment\+\_\+counter\+\_\+at\+\_\+tacho\+\_\+ev}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Increment H\+AL tick counter, for latter computation of R\+PM. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_a8d5c4f04683ef2370133c6582e1a18b5}{update\+\_\+\+P\+W\+M\+\_\+duty}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Set new value of P\+WM, to P\+W\+M-\/generating timer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_aa68db16714a58a700eceb3ddc19c1db6}{read\+\_\+\+P\+W\+M\+\_\+duty}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Obtain the P\+WM value, from the P\+W\+M-\/generating timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Bodies of the functions realising F\+AN R\+PM control. 
+
+\begin{DoxyAuthor}{Author}
+Paweł Rozenblut 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_m_s__signal__control_8c_a6fdf7020f344d899c73f618ce8567d75}\label{_m_s__signal__control_8c_a6fdf7020f344d899c73f618ce8567d75}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!compensate\_error@{compensate\_error}}
+\index{compensate\_error@{compensate\_error}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{compensate\_error()}{compensate\_error()}}
+{\footnotesize\ttfamily void compensate\+\_\+error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Update P\+WM duty cycle, if desired R\+PM is not within the control error range envelope (compensation is being triggered at +/-\/ 0.\+5\% of the total range of 0 R\+PM to 8000 R\+PM). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure, containing current P\+WM value set, readout of the reference R\+PM (system\textquotesingle{}s input) and actual R\+PM (system\textquotesingle{}s regulation error). The function corrects the P\+WM to be set, if the value currently set is too low, or too high. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s__signal__control_8c_ae109753ed1798aa1c854b69978d00e85}\label{_m_s__signal__control_8c_ae109753ed1798aa1c854b69978d00e85}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!get\_RPM\_actual@{get\_RPM\_actual}}
+\index{get\_RPM\_actual@{get\_RPM\_actual}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{get\_RPM\_actual()}{get\_RPM\_actual()}}
+{\footnotesize\ttfamily void get\+\_\+\+R\+P\+M\+\_\+actual (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Get the current value of R\+PM, and reset the counter measuring H\+AL sensor ticks in the duration of one second. 
+
+\begin{DoxyAttention}{Attention}
+Should be triggered every second elapsed.
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s__signal__control_8c_afc36ab908fdadfe06cf7a6b3e1c0f7da}\label{_m_s__signal__control_8c_afc36ab908fdadfe06cf7a6b3e1c0f7da}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!increment\_counter\_at\_tacho\_ev@{increment\_counter\_at\_tacho\_ev}}
+\index{increment\_counter\_at\_tacho\_ev@{increment\_counter\_at\_tacho\_ev}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{increment\_counter\_at\_tacho\_ev()}{increment\_counter\_at\_tacho\_ev()}}
+{\footnotesize\ttfamily void increment\+\_\+counter\+\_\+at\+\_\+tacho\+\_\+ev (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Increment H\+AL tick counter, for latter computation of R\+PM. 
+
+\begin{DoxyAttention}{Attention}
+S\+T\+M32 Timer must be compliant with the default configuration provided, that is\+: (T\+I\+M3, with T\+I\+M\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+2 used to generate P\+WM, clock frequency = 12k\+Hz, C\+L\+CK max = 10,000.)
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s__signal__control_8c_aa68db16714a58a700eceb3ddc19c1db6}\label{_m_s__signal__control_8c_aa68db16714a58a700eceb3ddc19c1db6}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!read\_PWM\_duty@{read\_PWM\_duty}}
+\index{read\_PWM\_duty@{read\_PWM\_duty}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{read\_PWM\_duty()}{read\_PWM\_duty()}}
+{\footnotesize\ttfamily void read\+\_\+\+P\+W\+M\+\_\+duty (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Obtain the P\+WM value, from the P\+W\+M-\/generating timer. 
+
+\begin{DoxyAttention}{Attention}
+S\+T\+M32 Timer must be compliant with the default configuration provided, that is\+: (T\+I\+M3, with T\+I\+M\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+2 used to generate P\+WM, clock frequency = 12k\+Hz, C\+L\+CK register max = 1000.)
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s__signal__control_8c_a41e6d6d32d2de1cfa657572ece0883ff}\label{_m_s__signal__control_8c_a41e6d6d32d2de1cfa657572ece0883ff}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!set\_PWM\_from\_RPM@{set\_PWM\_from\_RPM}}
+\index{set\_PWM\_from\_RPM@{set\_PWM\_from\_RPM}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{set\_PWM\_from\_RPM()}{set\_PWM\_from\_RPM()}}
+{\footnotesize\ttfamily void set\+\_\+\+P\+W\+M\+\_\+from\+\_\+\+R\+PM (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Obtain the value of P\+WM duty cycle to be set, from reference R\+PM. If desired R\+PM is within the appropriate control range, the ~\newline
+ function interpolates the P\+WM to be set, from the following dependency\+: P\+WM = (R\+PM -\/ 8332.\+9)/(-\/8.\+3707)). ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s__signal__control_8c_a060ebfa3cd7dac5cd16c131af0c1c9c9}\label{_m_s__signal__control_8c_a060ebfa3cd7dac5cd16c131af0c1c9c9}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!set\_reference\_RPM@{set\_reference\_RPM}}
+\index{set\_reference\_RPM@{set\_reference\_RPM}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{set\_reference\_RPM()}{set\_reference\_RPM()}}
+{\footnotesize\ttfamily void set\+\_\+reference\+\_\+\+R\+PM (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd,  }\item[{uint32\+\_\+t}]{new\+\_\+\+R\+P\+M\+\_\+ref }\end{DoxyParamCaption})}
+
+
+
+Set new reference value of fan\textquotesingle{}s R\+PM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure. \\
+\hline
+{\em new\+\_\+\+R\+P\+M\+\_\+ref} & New R\+PM value to be set.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_s__signal__control_8c_a8d5c4f04683ef2370133c6582e1a18b5}\label{_m_s__signal__control_8c_a8d5c4f04683ef2370133c6582e1a18b5}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!update\_PWM\_duty@{update\_PWM\_duty}}
+\index{update\_PWM\_duty@{update\_PWM\_duty}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{update\_PWM\_duty()}{update\_PWM\_duty()}}
+{\footnotesize\ttfamily void update\+\_\+\+P\+W\+M\+\_\+duty (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Set new value of P\+WM, to P\+W\+M-\/generating timer. 
+
+\begin{DoxyAttention}{Attention}
+S\+T\+M32 Timer must be compliant with the default configuration provided, that is\+: (T\+I\+M3, with T\+I\+M\+\_\+\+C\+H\+A\+N\+N\+E\+L\+\_\+2 used to generate P\+WM, clock frequency = 12k\+Hz, C\+L\+CK register max = 1000.)
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
