@@ -40,8 +40,8 @@ class MSL_UART_handler():
                     file_in.write("%d\n" %  status_code)
                     file_out.write("%d\n" % RPM_actual) 
 
-        if received_RPM_reference != RPM_reference:
-            enc_flag = True
+                if received_RPM_reference != RPM_reference:
+                    enc_flag = True
 
         return RPM_actual,received_RPM_reference, status_code,enc_flag
 
