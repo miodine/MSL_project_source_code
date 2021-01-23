@@ -319,7 +319,7 @@ class Ui_MainWindow(object):
 
 
         ##CLASS constants
-        self.MAX_RPM = 8000
+        self.MAX_RPM = 7900
         self.MIN_RPM = 0
 
         self.INCREMENT_STEP_RPM = 100

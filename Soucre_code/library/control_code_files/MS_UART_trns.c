@@ -19,10 +19,9 @@ void transmit_data_packet(Program_Data* pd)
 
 	memcpy(a, &(pd->RPM_actual), sizeof(pd->RPM_actual));
 	HAL_UART_Transmit(&huart3, (uint8_t*)a, 4, 1000);
-
+  
   memcpy(a, &(pd->RPM_reference), sizeof(pd->RPM_reference));
 	HAL_UART_Transmit(&huart3, (uint8_t*)a, 4, 1000);
-
 }
 
 
