@@ -15,13 +15,18 @@ class MSL_UART_handler():
 
         self.transmitting_ = False
 
-    def read_data(self, RPM_actual, status_code, file_in, file_out, log_flag):
+    def read_data(self, RPM_actual,RPM_reference, status_code, file_in, file_out, log_flag):
         if self.ser.is_open == True and self.transmitting_ == False:
             s = self.ser.read(1)
             if s != b'':
                 s = self.ser.read(4)
                 RPM_actual = int.from_bytes(s,'little')
                 print(RPM_actual)
+
+                s = self.ser.read(4)
+                RPM_reference = int.from_bytes(s,'little')
+                print(RPM_reference)
+                
                 s = self.ser.read(1)
                 status_code = int.from_bytes(s,'little')
                 print(status_code)
@@ -32,7 +37,7 @@ class MSL_UART_handler():
                     file_out.write("%d\n" % RPM_actual) 
 
 
-        return RPM_actual, status_code
+        return RPM_actual, RPM_reference ,status_code
 
     def send_data(self, Kp, Ki, Kd, RPM_set):
         #self.ser.write(struct.pack("B", COM_FLAG))
