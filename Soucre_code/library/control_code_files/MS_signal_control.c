@@ -14,7 +14,7 @@
 
 void compensate_error(Program_Data* pd)
 {
-   	if(pd->RPM_actual > (pd->RPM_reference+40))
+   	if((int)(pd->RPM_actual) > (int)(pd->RPM_reference+40))
    	{
    		if(pd->PWM < 1000)
         {
@@ -22,7 +22,7 @@ void compensate_error(Program_Data* pd)
         } 
    	}
 
-   	else if(pd->RPM_actual < (pd->RPM_reference-40))
+   	else if((int)(pd->RPM_actual) < (int)(pd->RPM_reference-40))
    	{
    		if(pd->PWM  > 0)
         {
@@ -75,3 +75,9 @@ void read_PWM_duty(Program_Data* pd)
     pd->PWM = __HAL_TIM_GET_COMPARE(&htim3, TIM_CHANNEL_2);
 }
 
+void encoder_RPM_duty_update(Program_Data* pd)
+{
+    GPIO_PinState ENC_B = HAL_GPIO_ReadPin(ENCODER_B_GPIO_Port, ENCODER_B_Pin);
+    if((ENC_B == 1) && (pd->RPM_reference<7900)) {pd->RPM_reference += 100;}
+	if((ENC_B == 0) && (pd->RPM_reference>0)) {pd->RPM_reference-= 100;}
+}

@@ -345,6 +345,7 @@ class Ui_MainWindow(object):
 
         self.monit = ""
 
+        self.enc_used = False
 
         self.logging_started = False
         self.input_logger = open("RPM_SET_DATA_LOG.txt", "a")
@@ -356,11 +357,14 @@ class Ui_MainWindow(object):
 ## CLASS METHODS
 
     def reg_quality_update(self):
-        self.RPM_actual, self.RPM_set, self.status,  = self.serial_handler.read_data(self.RPM_actual, self.RPM_set, self.status, self.input_logger, self.output_logger, self.logging_started)    
+        self.RPM_actual, self.RPM_set, self.status,self.enc_used  = self.serial_handler.read_data(self.RPM_actual, self.RPM_set, self.status, self.input_logger, self.output_logger, self.logging_started)    
         self.var_sysout.setText(str(self.RPM_actual) + " RPM")
         self.var_regerror.setText(str(self.RPM_set - self.RPM_actual)+ " RPM")  
+
         if(self.status != 0):
             self._update_monit("SERIAL DATA-BUFFER OVERFLOW OCCURED! PLEASE HOLD UNTIL SYSTEM OUTPUT SHOWS VALUE < 8000 AND > 0")
+        elif(self.enc_used == True):
+            self._update_monit("Reference RPM set locally!")
 
     def _update_readout(self):
         #get data 

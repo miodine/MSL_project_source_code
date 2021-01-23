@@ -16,16 +16,20 @@ class MSL_UART_handler():
         self.transmitting_ = False
 
     def read_data(self, RPM_actual,RPM_reference, status_code, file_in, file_out, log_flag):
+
+        received_RPM_reference = RPM_reference
+        enc_flag = False
+
         if self.ser.is_open == True and self.transmitting_ == False:
             s = self.ser.read(1)
-            if s != b'':
+            if s != b'': #todo: zmien na wykrywanie flagi
                 s = self.ser.read(4)
                 RPM_actual = int.from_bytes(s,'little')
                 print(RPM_actual)
 
                 s = self.ser.read(4)
-                RPM_reference = int.from_bytes(s,'little')
-                print(RPM_reference)
+                received_RPM_reference = int.from_bytes(s,'little')
+                print(received_RPM_reference)
                 
                 s = self.ser.read(1)
                 status_code = int.from_bytes(s,'little')
@@ -35,9 +39,11 @@ class MSL_UART_handler():
                 if log_flag== True:
                     file_in.write("%d\n" %  status_code)
                     file_out.write("%d\n" % RPM_actual) 
+        if received_RPM_reference != RPM_reference:
+            enc_flag = True
 
 
-        return RPM_actual, RPM_reference ,status_code
+        return received_RPM_reference, RPM_reference,status_code,enc_flag
 
     def send_data(self, Kp, Ki, Kd, RPM_set):
         #self.ser.write(struct.pack("B", COM_FLAG))
