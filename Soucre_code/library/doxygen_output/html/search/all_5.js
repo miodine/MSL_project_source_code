@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['ms_5fcore_2ec_6',['MS_core.c',['../_m_s__core_8c.html',1,'']]],
-  ['ms_5fcore_2eh_7',['MS_core.h',['../_m_s__core_8h.html',1,'']]],
-  ['ms_5fproj_5fal_2eh_8',['MS_proj_al.h',['../_m_s__proj__al_8h.html',1,'']]],
-  ['ms_5fsignal_5fcontrol_2ec_9',['MS_signal_control.c',['../_m_s__signal__control_8c.html',1,'']]],
-  ['ms_5fsignal_5fcontrol_2eh_10',['MS_signal_control.h',['../_m_s__signal__control_8h.html',1,'']]],
-  ['ms_5fuart_5ftrns_2ec_11',['MS_UART_trns.c',['../_m_s___u_a_r_t__trns_8c.html',1,'']]],
-  ['ms_5fuart_5ftrns_2eh_12',['MS_UART_trns.h',['../_m_s___u_a_r_t__trns_8h.html',1,'']]]
+  ['increment_5fcounter_5fat_5ftacho_5fev_6',['increment_counter_at_tacho_ev',['../_m_s__signal__control_8c.html#afc36ab908fdadfe06cf7a6b3e1c0f7da',1,'increment_counter_at_tacho_ev(Program_Data *pd):&#160;MS_signal_control.c'],['../_m_s__signal__control_8h.html#afc36ab908fdadfe06cf7a6b3e1c0f7da',1,'increment_counter_at_tacho_ev(Program_Data *pd):&#160;MS_signal_control.c']]],
+  ['initialize_5fstm32_5finterfaces_7',['initialize_STM32_interfaces',['../_m_s__core_8c.html#a657993cab1db72a4e524d79ab3987a2a',1,'initialize_STM32_interfaces(Program_Data *pd):&#160;MS_core.c'],['../_m_s__core_8h.html#a657993cab1db72a4e524d79ab3987a2a',1,'initialize_STM32_interfaces(Program_Data *pd):&#160;MS_core.c']]]
 ];

@@ -104,12 +104,14 @@ void read_PWM_duty(Program_Data* pd);
 /**
   * @brief  Control reference RPM through rotary encoder.
   * 
-  * @attention Place it in the encoder's clock rising edge detection callback.
+  * @attention Place it in the encoder's clock falling edge detection callback.
   *  
   * @param  pd: pointer to the Program_Data type structure. 
   * 
   * @retval None
   */
-void encoder_RPM_duty_update(Program_Data* pd);
+
+ 
+void encoder_RPM_update(Program_Data* pd);
 
 #endif

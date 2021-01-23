@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['transmit_5fdata_5fpacket_21',['transmit_data_packet',['../_m_s___u_a_r_t__trns_8c.html#a801c06e9bd5096cf3aca4aed6ef74318',1,'transmit_data_packet(Program_Data *pd):&#160;MS_UART_trns.c'],['../_m_s___u_a_r_t__trns_8h.html#a801c06e9bd5096cf3aca4aed6ef74318',1,'transmit_data_packet(Program_Data *pd):&#160;MS_UART_trns.c']]],
-  ['tx_5fflag_22',['tx_flag',['../struct_program___data.html#a9bc203bec977ff9eca018660844ad042',1,'Program_Data']]]
+  ['set_5fpwm_5ffrom_5frpm_21',['set_PWM_from_RPM',['../_m_s__signal__control_8c.html#a41e6d6d32d2de1cfa657572ece0883ff',1,'set_PWM_from_RPM(Program_Data *pd):&#160;MS_signal_control.c'],['../_m_s__signal__control_8h.html#a41e6d6d32d2de1cfa657572ece0883ff',1,'set_PWM_from_RPM(Program_Data *pd):&#160;MS_signal_control.c']]],
+  ['set_5freference_5frpm_22',['set_reference_RPM',['../_m_s__signal__control_8c.html#a060ebfa3cd7dac5cd16c131af0c1c9c9',1,'set_reference_RPM(Program_Data *pd, uint32_t new_RPM_ref):&#160;MS_signal_control.c'],['../_m_s__signal__control_8h.html#a060ebfa3cd7dac5cd16c131af0c1c9c9',1,'set_reference_RPM(Program_Data *pd, uint32_t new_RPM_ref):&#160;MS_signal_control.c']]]
 ];

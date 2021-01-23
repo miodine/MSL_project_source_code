@@ -24,7 +24,9 @@ void \mbox{\hyperlink{_m_s__signal__control_8c_afc36ab908fdadfe06cf7a6b3e1c0f7da
 void \mbox{\hyperlink{_m_s__signal__control_8c_a8d5c4f04683ef2370133c6582e1a18b5}{update\+\_\+\+P\+W\+M\+\_\+duty}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
 \begin{DoxyCompactList}\small\item\em Set new value of P\+WM, to P\+W\+M-\/generating timer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_m_s__signal__control_8c_aa68db16714a58a700eceb3ddc19c1db6}{read\+\_\+\+P\+W\+M\+\_\+duty}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
-\begin{DoxyCompactList}\small\item\em Obtain the P\+WM value, from the P\+W\+M-\/generating timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Obtain the P\+WM value, from the P\+W\+M-\/generating timer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8c_a21304f9f79e0331930665e4d23892e4f}{encoder\+\_\+\+R\+P\+M\+\_\+duty\+\_\+update}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -59,6 +61,16 @@ Update P\+WM duty cycle, if desired R\+PM is not within the control error range 
 
 
 Definition at line 15 of file M\+S\+\_\+signal\+\_\+control.\+c.
+
+\mbox{\Hypertarget{_m_s__signal__control_8c_a21304f9f79e0331930665e4d23892e4f}\label{_m_s__signal__control_8c_a21304f9f79e0331930665e4d23892e4f}} 
+\index{MS\_signal\_control.c@{MS\_signal\_control.c}!encoder\_RPM\_duty\_update@{encoder\_RPM\_duty\_update}}
+\index{encoder\_RPM\_duty\_update@{encoder\_RPM\_duty\_update}!MS\_signal\_control.c@{MS\_signal\_control.c}}
+\doxysubsubsection{\texorpdfstring{encoder\_RPM\_duty\_update()}{encoder\_RPM\_duty\_update()}}
+{\footnotesize\ttfamily void encoder\+\_\+\+R\+P\+M\+\_\+duty\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file M\+S\+\_\+signal\+\_\+control.\+c.
 
 \mbox{\Hypertarget{_m_s__signal__control_8c_ae109753ed1798aa1c854b69978d00e85}\label{_m_s__signal__control_8c_ae109753ed1798aa1c854b69978d00e85}} 
 \index{MS\_signal\_control.c@{MS\_signal\_control.c}!get\_RPM\_actual@{get\_RPM\_actual}}
@@ -139,7 +151,7 @@ S\+T\+M32 Timer must be compliant with the default configuration provided, that 
 \end{DoxyRetVals}
 
 
-Definition at line 73 of file M\+S\+\_\+signal\+\_\+control.\+c.
+Definition at line 72 of file M\+S\+\_\+signal\+\_\+control.\+c.
 
 \mbox{\Hypertarget{_m_s__signal__control_8c_a41e6d6d32d2de1cfa657572ece0883ff}\label{_m_s__signal__control_8c_a41e6d6d32d2de1cfa657572ece0883ff}} 
 \index{MS\_signal\_control.c@{MS\_signal\_control.c}!set\_PWM\_from\_RPM@{set\_PWM\_from\_RPM}}
@@ -218,5 +230,5 @@ S\+T\+M32 Timer must be compliant with the default configuration provided, that 
 \end{DoxyRetVals}
 
 
-Definition at line 68 of file M\+S\+\_\+signal\+\_\+control.\+c.
+Definition at line 67 of file M\+S\+\_\+signal\+\_\+control.\+c.
 

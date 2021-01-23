@@ -365,6 +365,7 @@ class Ui_MainWindow(object):
             self._update_monit("SERIAL DATA-BUFFER OVERFLOW OCCURED! PLEASE HOLD UNTIL SYSTEM OUTPUT SHOWS VALUE < 8000 AND > 0")
         if(self.enc_used == True):
             self._update_monit("Reference RPM set locally!")
+            self.var_sysin.setText(str(self.RPM_set) + " RPM")
 
     def _update_readout(self):
         #get data 

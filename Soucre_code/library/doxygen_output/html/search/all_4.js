@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['increment_5fcounter_5fat_5ftacho_5fev_4',['increment_counter_at_tacho_ev',['../_m_s__signal__control_8c.html#afc36ab908fdadfe06cf7a6b3e1c0f7da',1,'increment_counter_at_tacho_ev(Program_Data *pd):&#160;MS_signal_control.c'],['../_m_s__signal__control_8h.html#afc36ab908fdadfe06cf7a6b3e1c0f7da',1,'increment_counter_at_tacho_ev(Program_Data *pd):&#160;MS_signal_control.c']]],
-  ['initialize_5fstm32_5finterfaces_5',['initialize_STM32_interfaces',['../_m_s__core_8c.html#a657993cab1db72a4e524d79ab3987a2a',1,'initialize_STM32_interfaces(Program_Data *pd):&#160;MS_core.c'],['../_m_s__core_8h.html#a657993cab1db72a4e524d79ab3987a2a',1,'initialize_STM32_interfaces(Program_Data *pd):&#160;MS_core.c']]]
+  ['hal_5fpulse_5fcounter_5',['HAL_PULSE_counter',['../struct_program___data.html#a1c8bd10c35ac8c525665a796881338a2',1,'Program_Data']]]
 ];

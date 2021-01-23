@@ -25,7 +25,9 @@ void \mbox{\hyperlink{_m_s__signal__control_8h_afc36ab908fdadfe06cf7a6b3e1c0f7da
 void \mbox{\hyperlink{_m_s__signal__control_8h_a8d5c4f04683ef2370133c6582e1a18b5}{update\+\_\+\+P\+W\+M\+\_\+duty}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
 \begin{DoxyCompactList}\small\item\em Set new value of P\+WM, to P\+W\+M-\/generating timer. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_m_s__signal__control_8h_aa68db16714a58a700eceb3ddc19c1db6}{read\+\_\+\+P\+W\+M\+\_\+duty}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
-\begin{DoxyCompactList}\small\item\em Obtain the P\+WM value, from the P\+W\+M-\/generating timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Obtain the P\+WM value, from the P\+W\+M-\/generating timer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_s__signal__control_8h_ab1ecc84f4ccd1c0baf7e794d523c30e4}{encoder\+\_\+\+R\+P\+M\+\_\+update}} (\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$pd)
+\begin{DoxyCompactList}\small\item\em Control reference R\+PM through rotary encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -62,6 +64,29 @@ Update P\+WM duty cycle, if desired R\+PM is not within the control error range 
 
 Definition at line 15 of file M\+S\+\_\+signal\+\_\+control.\+c.
 
+\mbox{\Hypertarget{_m_s__signal__control_8h_ab1ecc84f4ccd1c0baf7e794d523c30e4}\label{_m_s__signal__control_8h_ab1ecc84f4ccd1c0baf7e794d523c30e4}} 
+\index{MS\_signal\_control.h@{MS\_signal\_control.h}!encoder\_RPM\_update@{encoder\_RPM\_update}}
+\index{encoder\_RPM\_update@{encoder\_RPM\_update}!MS\_signal\_control.h@{MS\_signal\_control.h}}
+\doxysubsubsection{\texorpdfstring{encoder\_RPM\_update()}{encoder\_RPM\_update()}}
+{\footnotesize\ttfamily void encoder\+\_\+\+R\+P\+M\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} $\ast$}]{pd }\end{DoxyParamCaption})}
+
+
+
+Control reference R\+PM through rotary encoder. 
+
+\begin{DoxyAttention}{Attention}
+Place it in the encoder\textquotesingle{}s clock falling edge detection callback.
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & pointer to the \mbox{\hyperlink{struct_program___data}{Program\+\_\+\+Data}} type structure.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
 \mbox{\Hypertarget{_m_s__signal__control_8h_ae109753ed1798aa1c854b69978d00e85}\label{_m_s__signal__control_8h_ae109753ed1798aa1c854b69978d00e85}} 
 \index{MS\_signal\_control.h@{MS\_signal\_control.h}!get\_RPM\_actual@{get\_RPM\_actual}}
 \index{get\_RPM\_actual@{get\_RPM\_actual}!MS\_signal\_control.h@{MS\_signal\_control.h}}
@@ -141,7 +166,7 @@ S\+T\+M32 Timer must be compliant with the default configuration provided, that 
 \end{DoxyRetVals}
 
 
-Definition at line 73 of file M\+S\+\_\+signal\+\_\+control.\+c.
+Definition at line 72 of file M\+S\+\_\+signal\+\_\+control.\+c.
 
 \mbox{\Hypertarget{_m_s__signal__control_8h_a41e6d6d32d2de1cfa657572ece0883ff}\label{_m_s__signal__control_8h_a41e6d6d32d2de1cfa657572ece0883ff}} 
 \index{MS\_signal\_control.h@{MS\_signal\_control.h}!set\_PWM\_from\_RPM@{set\_PWM\_from\_RPM}}
@@ -220,5 +245,5 @@ S\+T\+M32 Timer must be compliant with the default configuration provided, that 
 \end{DoxyRetVals}
 
 
-Definition at line 68 of file M\+S\+\_\+signal\+\_\+control.\+c.
+Definition at line 67 of file M\+S\+\_\+signal\+\_\+control.\+c.
 
