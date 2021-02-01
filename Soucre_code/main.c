@@ -30,6 +30,8 @@
 #include "arm_math.h"
 #include "math.h"
 
+#include "MS_proj_al.h"
+
 
 /* USER CODE END Includes */
 
@@ -51,6 +53,9 @@
 
 /* USER CODE BEGIN PV */
 
+Program_Data pd;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,57 +67,8 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
- uint32_t counter=0;
- uint32_t rpm =0;
- //char buffer [50];
- uint8_t rx_buffer[16];
- uint32_t pwm_input =1000;
-
- uint32_t RPM_to_be_set=6000;
 
 
-
-  uint32_t RPM_to_PWM(uint32_t RPM)
-  {
- 	 float32_t V = RPM_to_voltage(RPM);
- 	 return motor_input_voltage_to_PWM(V);
-  }
-
-  //RPM = aPWM + b, where:  a = -8.3707 b= 8332.9
-
-   uint32_t set_PWM_from_RPM(uint32_t RPM)
-   {
-  	 uint32_t PWM = 0;
-  	 if(RPM < 240) return 1000;
-  	 if(RPM > 8000) return 0;
-  	 return (uint32_t)(((float)RPM - 8332.9)/(-8.3707));
-   }
-
-
-   uint32_t compensate(uint32_t u, uint32_t y, uint32_t curr_PWM)
-   {
-   	if(y > (u+40))
-   	{
-   		if(curr_PWM < 1000) return curr_PWM += 1;
-   	}
-
-   	else if(y < (u-40))
-   	{
-   		if(curr_PWM > 0) return curr_PWM -= 1;
-   	}
-   	return curr_PWM;
-   }
-
-
-
-
-
-
-
-uint32_t pwm_adjusted = 0;
-uint32_t pwm_actual =0;
-uint32_t x = 0;
-uint32_t pwm_to_set=0;
 /* USER CODE END 0 */
 
 /**
@@ -152,14 +108,9 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
-	/* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim6);
-  HAL_TIM_Base_Start_IT(&htim7);
- HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+  initialize_STM32_interfaces(&pd);
 
- pwm_to_set=set_PWM_from_RPM(RPM_to_be_set);
- __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pwm_to_set);
- HAL_UART_Receive_IT(&huart3, rx_buffer, 16);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -187,9 +138,6 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
 
-  /** Configure LSE Drive Capability
-  */
-  HAL_PWR_EnableBkUpAccess();
   /** Configure the main internal regulator output voltage
   */
   __HAL_RCC_PWR_CLK_ENABLE();
@@ -198,7 +146,7 @@ void SystemClock_Config(void)
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 4;
@@ -241,15 +189,17 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
 {
 	if(GPIO_Pin == TACH_Pin)
 	{
-		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-		counter++;
+		increment_counter_at_tacho_ev(&pd);
 	}
 
-	if(GPIO_Pin == USER_Btn_Pin)
+	if(GPIO_Pin == ENCODER_A_Pin)
 	{
-		//1000 PWM == 0 V  0 PWM == 5V
-		//8000 PWM == 1 V ?????
-		//__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 800); //1V fan +V input
+
+		encoder_RPM_update(&pd);
+
+		set_PWM_from_RPM(&pd);
+	    update_PWM_duty(&pd);
+
 	}
 
 }
@@ -258,23 +208,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim-> Instance ==TIM6)
 	{
-		rpm = counter*1*60/2;
-		counter=0;
-		pwm_actual =__HAL_TIM_GET_COMPARE(&htim3, TIM_CHANNEL_2);
-
-		x = compensate(RPM_to_be_set, rpm, pwm_actual);
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, x);
-
-
-
-		uint8_t a[4] = {0,};
-		memcpy(a, &rpm, sizeof(rpm));
-		uint8_t flag_ = 68;
-		HAL_UART_Transmit(&huart3, (uint8_t*)&flag_, 1, 1000);
-		HAL_UART_Transmit(&huart3, (uint8_t*)a, 4, 1000);
-
-
-
+		get_RPM_actual(&pd);
+		read_PWM_duty(&pd);
+		compensate_error(&pd);
+		update_PWM_duty(&pd);
+		transmit_data_packet(&pd);
 	}
 
 
@@ -296,11 +234,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART3)
 	{
+	deparse_received_data(&pd);
+	set_PWM_from_RPM(&pd);
+	update_PWM_duty(&pd);
 
-	  RPM_to_be_set = rx_buffer[12] | (rx_buffer[13] << 8) | (rx_buffer[14] << 16) | (rx_buffer[15] << 24);
-	  pwm_to_set = set_PWM_from_RPM(RPM_to_be_set);
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pwm_to_set);
-		HAL_UART_Receive_IT(&huart3, rx_buffer, 16);
+	HAL_UART_Receive_IT(&huart3, pd.rx_buffer, 16);
 	}
 }
 
