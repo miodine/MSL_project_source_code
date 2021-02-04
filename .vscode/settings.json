@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "ms_uart_trns.h": "c"
+        "ms_uart_trns.h": "c",
+        "ms_proj_al.h": "c"
     }
 }

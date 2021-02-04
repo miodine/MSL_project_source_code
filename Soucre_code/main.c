@@ -26,12 +26,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include"stdio.h"
+#include "stdio.h"
 #include "arm_math.h"
 #include "math.h"
 
 #include "MS_proj_al.h"
-
 
 /* USER CODE END Includes */
 
@@ -55,7 +54,6 @@
 
 Program_Data pd;
 
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,8 +64,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-
 
 /* USER CODE END 0 */
 
@@ -110,16 +106,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
   initialize_STM32_interfaces(&pd);
 
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-
-
 
     /* USER CODE END WHILE */
 
@@ -165,8 +157,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -185,38 +176,35 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == TACH_Pin)
-	{
-		increment_counter_at_tacho_ev(&pd);
-	}
+  if (GPIO_Pin == TACH_Pin)
+  {
+    increment_counter_at_tacho_ev(&pd);
+  }
 
-	if(GPIO_Pin == ENCODER_A_Pin)
-	{
+  if (GPIO_Pin == ENCODER_A_Pin)
+  {
 
-		encoder_RPM_update(&pd);
+    encoder_RPM_update(&pd);
 
-		set_PWM_from_RPM(&pd);
-	    update_PWM_duty(&pd);
-
-	}
-
+    set_PWM_from_RPM(&pd);
+    update_PWM_duty(&pd);
+  }
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim-> Instance ==TIM6)
-	{
-		get_RPM_actual(&pd);
-		read_PWM_duty(&pd);
-		compensate_error(&pd);
-		update_PWM_duty(&pd);
-		transmit_data_packet(&pd);
-	}
+  if (htim->Instance == TIM6)
+  {
+    get_RPM_actual(&pd);
+    read_PWM_duty(&pd);
+    compensate_error(&pd);
+    update_PWM_duty(&pd);
+    transmit_data_packet(&pd);
+  }
 
-
-	/*if(htim-> Instance == TIM7)
+  /*if(htim-> Instance == TIM7)
 		{
 
 			sprintf(buffer, "%d \r\n", rpm);
@@ -227,28 +215,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    	   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pwm_input);
 	       }
 		}*/
-
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if(huart->Instance == USART3)
-	{
-	deparse_received_data(&pd);
-	set_PWM_from_RPM(&pd);
-	update_PWM_duty(&pd);
+  if (huart->Instance == USART3)
+  {
+    deparse_received_data(&pd);
+    set_PWM_from_RPM(&pd);
+    update_PWM_duty(&pd);
 
-	HAL_UART_Receive_IT(&huart3, pd.rx_buffer, 16);
-	}
+    HAL_UART_Receive_IT(&huart3, pd.rx_buffer, 16);
+  }
 }
-
-
-
-
-
-
-
-
 
 /* USER CODE END 4 */
 
@@ -264,7 +243,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
