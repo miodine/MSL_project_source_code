@@ -1,8 +1,0 @@
-MS_signal_control.c:15:6:compensate_error	16	static
-MS_signal_control.c:34:6:set_PWM_from_RPM	24	static
-MS_signal_control.c:51:6:set_reference_RPM	16	static
-MS_signal_control.c:56:6:get_RPM_actual	16	static
-MS_signal_control.c:62:6:increment_counter_at_tacho_ev	16	static
-MS_signal_control.c:67:6:update_PWM_duty	16	static
-MS_signal_control.c:72:6:read_PWM_duty	16	static
-MS_signal_control.c:77:6:encoder_RPM_update	24	static

@@ -1,2 +1,0 @@
-MS_UART_trns.c:14:6:transmit_data_packet	24	static
-MS_UART_trns.c:28:6:deparse_received_data	16	static
