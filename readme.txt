@@ -1,3 +1,5 @@
+Microprocessor System Laboratory - final project source code and documentation. 
+
 I. 
 Embedded App project library and main.c copied from the STM32CubeIDE file are stored in the 
 'Source_code' folder. The main.c file can be found in that directory, and to access the library modules
